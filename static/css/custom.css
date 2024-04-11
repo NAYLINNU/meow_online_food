@@ -21,6 +21,7 @@
     position: fixed;
     bottom: 100%;
     right: 20px;
+    width: 200px;
     animation-name: show-toast;
     animation-duration: 8s;
     z-index: 99;
