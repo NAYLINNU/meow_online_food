@@ -1,34 +1,19 @@
-@keyframes show-toast {
-    0% {
-        bottom: -100%;
-    }
-
-    20% {
-        bottom: 100px;
-    }
-
-    80% {
-        bottom: 10px;
-    }
-
-    100% {
-        bottom: -100%;
-    }
-
-}
-
 .show-notification {
-    position: fixed;
-    bottom: 100%;
-    right: 20px;
-    animation-name: show-toast;
-    animation-duration: 8s;
-    z-index: 99;
+    animation-duration: 3s;
+    animation-name: slidein;
+    animation-iteration-count: unset;
+    animation-direction: normal;
 }
 
 
-/* .btn.btn-info {
-    padding: 2px 1.5em;
-    font-size: 12px;
-    cursor: pointer;
-} */
+@keyframes slidein {
+    from {
+        margin-left: 100%;
+        width: 300%;
+    }
+
+    to {
+        margin-left: 0%;
+        width: 100%;
+    }
+}
