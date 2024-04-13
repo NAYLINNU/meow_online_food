@@ -9,7 +9,7 @@ def post_save_create_profile_receiver(sender, instance,created, **kwargs):  #"cr
     print(created)
     if created:
         UserProfile.objects.create(user=instance)
-        print('user profile is created')
+        # print('user profile is created')
     else:
         try:
             profile = UserProfile.objects.get(user=instance)
@@ -17,11 +17,11 @@ def post_save_create_profile_receiver(sender, instance,created, **kwargs):  #"cr
         except:
             #Create the user profile if not exit
             UserProfile.objects.create(user=instance)
-            print('Profile was not exit, but I create one')
-        print('User is Updated')
+            # print('Profile was not exit, but I create one')
+        # print('User is Updated')
 @receiver(pre_save,sender=User)
 def pre_save_profile_receiver(sender, instance, **kwargs):
-    
-    print(instance.username, 'This user is being saved!')
+    pass
+    # print(instance.username, 'This user is being saved!')
     
 #post_save_connect(post_save_create_profile_receiver,sender=User)

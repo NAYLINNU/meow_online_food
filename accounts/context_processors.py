@@ -1,7 +1,7 @@
 from vendor.models import Vendor
 from django.conf import settings
 
-#every background  and cover photo html  page for the same vendor 
+#every background  and cover photo html  page will same for the  vendor 
 def get_vendor(request):
     try:
         vendor = Vendor.objects.get(user=request.user)

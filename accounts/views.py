@@ -11,21 +11,40 @@ from django.contrib.auth.decorators import login_required, user_passes_test
 from django.core.exceptions import PermissionDenied
 from django.utils.http import urlsafe_base64_decode
 
-
+from django.contrib.auth.models import AnonymousUser
 # Restrict the vendor from accessing the customer page for 403 forbiden error using with user_passes_test
+# def check_role_vendor(user):
+#     if user.role == 1:
+        
+#         return True
+#     else:
+#         raise PermissionDenied
+
+# #Restrict the customer from accessing the vendor page for 403 forbiden error using with user_passes_test
+# def check_role_customer(user):
+#     if user.role == 2:
+#         return True
+#     else:
+#         raise PermissionDenied
+
+
 def check_role_vendor(user):
-    if user.role == 1:
+    if isinstance(user, AnonymousUser):
+        return False  # Return False for unauthenticated users
+    elif user.role == User.VENDOR:  # Assuming User.VENDOR represents the vendor role
         return True
     else:
         raise PermissionDenied
 
-#Restrict the customer from accessing the vendor page for 403 forbiden error using with user_passes_test
 def check_role_customer(user):
-    if user.role == 2:
+    if isinstance(user, AnonymousUser):
+        return False  # Return False for unauthenticated users
+    elif user.role == User.CUSTOMER:  # Assuming User.CUSTOMER represents the customer role
         return True
     else:
         raise PermissionDenied
-   
+
+
 def registerUser(request):
     if request.user.is_authenticated:
         messages.warning(request,'You are already login')
@@ -132,7 +151,7 @@ def activate(request, uidb64, token):
         return redirect('myAccount')
     else:
         messages.error(request, 'Invalid activation link')
-        return redirect(myAccount)
+        return redirect('myAccount')
 
 def login(request):
     if request.user.is_authenticated:
@@ -176,7 +195,6 @@ def custDashboard(request):
 @user_passes_test(check_role_vendor)
 @login_required(login_url='login')
 def vendorDashboard(request):
-    
     return render(request,'accounts/vendorDashboard.html')
 
 def forgot_password(request):
@@ -213,7 +231,7 @@ def reset_password_validate(request, uidb64, token):
         return redirect('reset_password')
     else:
         messages.error(request,'This link has been expired')
-        return redirect(myAccount)
+        return redirect('myAccount')
 
 
 def reset_password(request):
