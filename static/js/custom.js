@@ -5,7 +5,7 @@ function initAutoComplete() {
         document.getElementById('id_address'),
         {
             types: ['geocode', 'establishment'],
-            //default in this app is "IN" - add your country code
+            //default in this app is "th" - add your country code
             componentRestrictions: { 'country': ['th'] },
         })
     // function to specify what should happen when the prediction is clicked
