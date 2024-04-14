@@ -21,8 +21,11 @@
             <div class="col-lg-9 col-md-9 col-sm-12 col-xs-12">
                 <div class="user-dashboard loader-holder">
                     <div class="user-holder">
-                        <h5 class="text-uppercase">Mbuild your food menu</h5>
+                        <h5 class="text-uppercase">build your food menu</h5>
                         <hr>
+                        <button class="btn btn-secondary" onclick="history.back()"><i class="fa fa-angle-left"
+                                aria-hidden="true"></i>Back</button>
+                        <br><br>
                         <h6>Add New Categories</h6>
 
                         <form action="{% url 'add_category' %}" method="POSt">

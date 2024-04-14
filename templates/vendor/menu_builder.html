@@ -21,10 +21,11 @@
             <div class="col-lg-9 col-md-9 col-sm-12 col-xs-12">
                 <div class="user-dashboard loader-holder">
                     <div class="user-holder">
-                        <h5 class="text-uppercase">Mbuild your food menu</h5>
+                        <h5 class="text-uppercase">build your food menu</h5>
                         <hr>
                         <h6>Menu Categories</h6>
-                        <a href="#" class="btn btn-primary float-right m-1"><i class="fa fa-plus"
+                        {% if categories %}
+                        <a href="{% url 'add_food' %}" class="btn btn-primary float-right m-1"><i class="fa fa-plus"
                                 aria-hidden="true"></i>Add Food</a>
                         <a href="{% url 'add_category' %}" class="btn btn-info float-right m-1"><i class="fa fa-plus"
                                 aria-hidden="true"></i>Add Category</a>
@@ -57,6 +58,13 @@
 
 
                         </table>
+                        {% else %}
+                        <h5 class="text-center">No Categories Found</h5>
+                        <div class="text-center"> <a href="{% url 'add_category' %}"
+                                class="btn btn-info float-right m-1"><i class="fa fa-plus" aria-hidden="true"></i>Add
+                                Category</a>
+                        </div>
+                        {% endif %}
 
                     </div>
                 </div>

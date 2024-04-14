@@ -26,22 +26,46 @@
                         <button class="btn btn-secondary" onclick="history.back()"><i class="fa fa-angle-left"
                                 aria-hidden="true"></i>Back</button>
                         <br><br>
-                        <h6>Edit Categories</h6>
+                        <h6>Add Food</h6>
 
-                        <form action="{% url 'edit_category' category.pk%}" method="POSt">
+                        <form action="{% url 'add_food' %}" method="POSt" enctype="multipart/form-data">
                             {% csrf_token %}
                             <div class="form-fields-set">
                                 <div class="row">
                                     <div class="col-lg-12 col-ms-12 col-sm-12">
                                         <div class="field-holder">
-                                            <label>Category Name *</label>
-                                            {{form.category_name}}
+                                            <label>Food Title *</label>
+                                            {{form.food_title}}
+                                        </div>
+                                    </div>
+                                    <div class="col-lg-12 col-ms-12 col-sm-12">
+                                        <div class="field-holder">
+                                            <label>Category *</label>
+                                            {{form.category}}
                                         </div>
                                     </div>
                                     <div class="col-lg-12 col-ms-12 col-sm-12">
                                         <div class="field-holder">
                                             <label>Description</label>
                                             {{form.description}}
+                                        </div>
+                                    </div>
+                                    <div class="col-lg-6 col-ms-6 col-sm-12">
+                                        <div class="field-holder">
+                                            <label>Price *</label>
+                                            {{form.price}}
+                                        </div>
+                                    </div>
+                                    <div class="col-lg-6 col-ms-6 col-sm-12">
+                                        <div class="field-holder">
+                                            <label>Image</label>
+                                            {{form.image}}
+                                        </div>
+                                    </div>
+                                    <div class="col-lg-6 col-ms-6 col-sm-12">
+                                        <div class="field-holder">
+                                            <label>Is Available</label>
+                                            {{form.is_available}}
                                         </div>
                                     </div>
                                 </div>
@@ -60,11 +84,7 @@
                             {% endfor %}
 
                             <button type="submit" class="btn btn-info"><i class="fa fa-check"
-                                    aria-hidden="true"></i>Update</button>
-
-                            <a href="{% url 'delete_category' category.pk %}"
-                                onclick="return confirm('Are you sure delete?')" class="btn btn-danger">
-                                <i class="fa fa-trash " aria-hidden="true">Delete</i></a>
+                                    aria-hidden="true"></i>Create</button>
 
                         </form>
                         <!-- render form -->

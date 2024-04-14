@@ -36,9 +36,16 @@
                                                             <li class="gal-img">
                                                                 <div class="drag-list">
                                                                     <div class="item-thumb">
+                                                                        {% if profile.profile_picture %}
                                                                         <img class="thumbnail"
                                                                             src="{{profile.profile_picture.url}}"
                                                                             alt="Logo">
+
+                                                                        {% else %}
+                                                                        <img class="thumbnail"
+                                                                            src="{% static 'images/default-profile.PNG' %}"
+                                                                            alt="Logo">
+                                                                        {% endif %}
                                                                     </div>
                                                                 </div>
                                                             </li>
@@ -61,9 +68,17 @@
                                                             <li class="gal-img">
                                                                 <div class="drag-list">
                                                                     <div class="item-thumb">
+                                                                        {% if profile.cover_photos %}
                                                                         <img class="thumbnail"
                                                                             src="{{profile.cover_photos.url}}"
                                                                             alt="Cover Photo">
+
+                                                                        {% else %}
+                                                                        <img class="thumbnail"
+                                                                            src="{% static 'images/default-cover.PNG' %}"
+                                                                            alt="Cover Photo">
+
+                                                                        {% endif %}
                                                                     </div>
                                                                 </div>
                                                             </li>
@@ -72,6 +87,7 @@
                                                     <div class="text-holder">
                                                         <label>Update Cover Photo</label>
                                                         <div class="upload-gallery">
+
                                                             {{ profile_form.cover_photos }}
                                                         </div>
                                                         <label
