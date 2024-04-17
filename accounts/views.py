@@ -10,7 +10,7 @@ from django.contrib import messages,auth
 from django.contrib.auth.decorators import login_required, user_passes_test
 from django.core.exceptions import PermissionDenied
 from django.utils.http import urlsafe_base64_decode
-
+from django.template.defaultfilters import slugify
 from django.contrib.auth.models import AnonymousUser
 # Restrict the vendor from accessing the customer page for 403 forbiden error using with user_passes_test
 # def check_role_vendor(user):
@@ -95,7 +95,7 @@ def registerUser(request):
 def registerVendor(request):
     if request.user.is_authenticated:
         messages.warning(request,'You are already login')
-        return redirect('vendorDashboard')
+        return redirect('myAccount')
     elif request.method =='POST':
         #Store the data and Create User
         form = UserForm(request.POST)
@@ -111,6 +111,8 @@ def registerVendor(request):
             user.save()
             vendor = v_form.save(commit=False)
             vendor.user = user
+            vendor_name = v_form.cleaned_data['vendor_name']
+            vendor.vendor_slug = slugify(vendor_name)+'-'+str(user.id)
             user_profile = UserProfile.objects.get(user=user)
             vendor.user_profile= user_profile
             vendor.save()
