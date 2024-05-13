@@ -75,8 +75,10 @@ def add_category(request):
             category_name = form.cleaned_data['category_name']
             category = form.save(commit=False)
             category.vendor = get_vendor(request)
-            category.slug = slugify(category_name)
-            form.save()
+            
+            category.save()  #here category id will be generated
+            category.slug = slugify(category_name) + '-'+str(category.id)
+            category.save()
             messages.success(request,'Category added successfully')
             return redirect('menu_builder')
         else:
@@ -123,6 +125,7 @@ def delete_category(request, pk=None):
 @user_passes_test(check_role_vendor)
 @login_required(login_url='login')
 def add_food(request):
+    # i need to fix already food error
     if request.method == 'POST':      
         form = FoodItemForm(request.POST, request.FILES)
         if form.is_valid():
